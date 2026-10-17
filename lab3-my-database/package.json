@@ -1,0 +1,24 @@
+{
+  "name": "lab3-my-database",
+  "version": "1.1.0",
+  "description": "Модуль управления базой данных пользователей и новостей социальной сети на JSON-файлах",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "test": "node -e \"import('./index.js').then(m => console.log('Database module loaded successfully!'))\""
+  },
+  "keywords": [
+    "social-network",
+    "json-database",
+    "express",
+    "lab3"
+  ],
+  "author": "biyrololo",
+  "license": "ISC"
+}

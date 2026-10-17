@@ -1,0 +1,48 @@
+{
+  "name": "lab3-social-network",
+  "version": "1.0.0",
+  "description": "Администрирование социальной сети - Лабораторная работа 3",
+  "main": "server/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "build": "npm run build:gulp && npm run build:webpack",
+    "build:gulp": "gulp build",
+    "build:webpack": "webpack --mode production"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "lab3-my-database": "file:./lab3-my-database",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "babel-loader": "^9.2.1",
+    "clean-css": "^5.3.3",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
+    "gulp": "^5.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-pug": "^5.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-terser": "^2.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "pug": "^3.0.3",
+    "pug-loader": "^2.4.0",
+    "sass": "^1.80.6",
+    "sass-loader": "^16.0.3",
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "author": "biyrololo",
+  "license": "ISC"
+}

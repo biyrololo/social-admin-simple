@@ -1,0 +1,27 @@
+$primary-color: #4361ee;
+$primary-hover: #3a56d4;
+$secondary-color: #64748b;
+$success-color: #2ec4b6;
+$warning-color: #ff9f1c;
+$danger-color: #e71d36;
+$dark-color: #1e293b;
+$light-bg: #f8fafc;
+$card-bg: #ffffff;
+$border-color: #e2e8f0;
+
+$font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+$font-size-base: 0.95rem;
+$border-radius-sm: 6px;
+$border-radius-md: 10px;
+$border-radius-lg: 16px;
+
+$avatar-sm: 36px;
+$avatar-md: $avatar-sm * 1.5;
+$avatar-lg: $avatar-sm * 2.5;
+
+$box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+$box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+$box-shadow-hover: 0 12px 20px -3px rgba(67, 97, 238, 0.15);
+
+$transition-default: all 0.25s ease-in-out;

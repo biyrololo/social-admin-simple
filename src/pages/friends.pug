@@ -1,0 +1,51 @@
+extends ../layouts/main.pug
+
+block content
+  .page-header
+    div
+      h1.page-title Друзья пользователя
+      p.page-subtitle Просмотр и управление списком друзей выбранного участника сети
+
+    .d-flex.gap-2
+      button.btn.btn-outline-primary#addFriendModalBtn(type="button" data-bs-toggle="modal" data-bs-target="#addFriendModal")
+        i.bi.bi-person-plus.me-1
+        | Добавить в друзья
+
+  .app-card
+    .row.align-items-center
+      .col-md-6
+        label.form-label.fw-semibold(for="currentUserSelect") Выберите пользователя для просмотра друзей:
+        select.form-select#currentUserSelect
+          option(value="") Загрузка списка пользователей...
+      .col-md-6.mt-3.mt-md-0
+        .d-flex.align-items-center.gap-3.p-2.rounded.bg-light#currentUserCard
+          img.avatar-md#selectedUserAvatar(src="/uploads/empty.jpg" alt="Avatar")
+          div
+            h6.mb-0#selectedUserName Загрузка...
+            small.text-muted#selectedUserInfo email@example.com
+
+  .app-card
+    .card-header-custom
+      h5
+        i.bi.bi-people-fill.text-primary.me-2
+        | Список друзей 
+        span.badge.bg-primary-subtle.text-primary.rounded-pill#friendsCount 0
+    
+    div#friendsListContainer
+      .text-center.py-4
+        .spinner-border.text-primary.spinner-border-sm.me-2(role="status")
+        | Загрузка друзей...
+
+block modals
+  .modal.fade#addFriendModal(tabindex="-1" aria-labelledby="addFriendModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          h5.modal-title#addFriendModalLabel Добавить в друзья
+          button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+        .modal-body
+          p.text-muted.small Выберите пользователя из списка кандидатов для добавления в друзья:
+          div#candidatesList.list-group
+            .text-center.py-3.text-muted Загрузка кандидатов...
+        .modal-footer
+          button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Закрыть

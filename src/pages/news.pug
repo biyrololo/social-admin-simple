@@ -1,0 +1,59 @@
+extends ../layouts/main.pug
+
+block content
+  .page-header
+    div
+      h1.page-title Новости друзей
+      p.page-subtitle Лента публикаций друзей пользователя и панель модерации контента
+
+    .d-flex.gap-2
+      button.btn.btn-primary(type="button" data-bs-toggle="modal" data-bs-target="#createPostModal")
+        i.bi.bi-pencil-square.me-1
+        | Опубликовать новость
+
+  .app-card
+    .row.g-3.align-items-center
+      .col-md-5
+        label.form-label.fw-semibold(for="newsUserSelect") Чьи друзья вас интересуют?
+        select.form-select#newsUserSelect
+          option(value="") Загрузка списка пользователей...
+      
+      .col-md-4
+        label.form-label.fw-semibold(for="feedScopeSelect") Источник ленты:
+        select.form-select#feedScopeSelect
+          option(value="friends" selected) Только новости друзей
+          option(value="all") Все новости сообщества
+
+      .col-md-3
+        label.form-label.fw-semibold(for="newsStatusFilter") Статус модерации:
+        select.form-select#newsStatusFilter
+          option(value="") Любой статус
+          option(value="active") Только активные
+          option(value="blocked") Только заблокированные
+
+  .news-feed#newsFeedContainer
+    .text-center.py-5
+      .spinner-border.text-primary(role="status")
+      p.text-muted.mt-2 Загрузка ленты новостей...
+
+block modals
+  .modal.fade#createPostModal(tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          h5.modal-title#createPostModalLabel Новая публикация
+          button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+        .modal-body
+          form#createPostForm
+            .mb-3
+              label.form-label(for="postAuthorSelect") Автор публикации:
+              select.form-select#postAuthorSelect(required)
+            .mb-3
+              label.form-label(for="postTitleInput") Заголовок новости *
+              input.form-control#postTitleInput(type="text" placeholder="Введите заголовок..." required)
+            .mb-3
+              label.form-label(for="postContentInput") Содержание новости *
+              textarea.form-control#postContentInput(rows="4" placeholder="Текст новости или сообщения..." required)
+        .modal-footer
+          button.btn.btn-light(type="button" data-bs-dismiss="modal") Отмена
+          button.btn.btn-primary#submitPostBtn(type="button") Опубликовать

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+uploads/*
+!uploads/.gitkeep
+!uploads/empty.jpg
+test-server.sock
+.DS_Store
+*.log
+*.zip

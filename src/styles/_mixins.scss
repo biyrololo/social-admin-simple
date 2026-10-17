@@ -1,0 +1,61 @@
+@use "sass:color";
+@import "variables";
+
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin modern-card($bg: $card-bg, $radius: $border-radius-md) {
+    background-color: $bg;
+    border-radius: $radius;
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow-sm;
+    transition: $transition-default;
+
+    &:hover {
+        box-shadow: $box-shadow-md;
+        border-color: rgba($primary-color, 0.3);
+    }
+}
+
+@mixin status-badge($color) {
+    background-color: rgba($color, 0.12);
+    color: color.adjust($color, $lightness: -10%);
+    border: 1px solid rgba($color, 0.25);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.35em 0.75em;
+    border-radius: $border-radius-sm;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    &::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: $color;
+    }
+}
+
+@mixin avatar-circle($size) {
+    width: $size;
+    height: $size;
+    min-width: $size;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    box-shadow: $box-shadow-sm;
+}
+
+@mixin text-truncate-lines($lines: 2) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

@@ -1,0 +1,170 @@
+extends ../layouts/main.pug
+
+block content
+  .page-header
+    div
+      h1.page-title Управление пользователями
+      p.page-subtitle Просмотр, редактирование данных, ролей, статусов и фотографий
+
+    button.btn.btn-primary.d-flex.align-items-center.gap-2(type="button" data-bs-toggle="modal" data-bs-target="#addUserModal")
+      i.bi.bi-person-plus-fill
+      | Добавить пользователя
+
+  .app-card
+    .row.g-3.align-items-center
+      .col-md-5
+        .input-group
+          span.input-group-text.bg-white
+            i.bi.bi-search
+          input.form-control#searchInput(type="text" placeholder="Поиск по ФИО или Email...")
+      
+      .col-md-3
+        select.form-select#roleFilter
+          option(value="") Все роли
+          option(value="admin") Администратор
+          option(value="user") Пользователь
+      
+      .col-md-3
+        select.form-select#statusFilter
+          option(value="") Все статусы
+          option(value="active") Активный
+          option(value="unconfirmed") Не подтвержден
+          option(value="banned") Заблокирован
+
+      .col-md-1.text-end
+        button.btn.btn-outline-secondary.w-100#resetFiltersBtn(title="Сбросить фильтры")
+          i.bi.bi-arrow-counterclockwise
+
+  .app-card
+    .table-responsive
+      table.table.users-table.align-middle
+        thead
+          tr
+            th(style="width: 60px;") Фото
+            th ФИО
+            th Дата рождения
+            th Email
+            th Роль
+            th Статус
+            th.text-end Действия
+        tbody#usersTableBody
+          tr
+            td.text-center.py-4(colspan="7")
+              .spinner-border.text-primary.spinner-border-sm.me-2(role="status")
+              | Загрузка списка пользователей...
+
+block modals
+  .modal.fade#addUserModal(tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          h5.modal-title#addUserModalLabel Добавление пользователя
+          button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+        .modal-body
+          form#addUserForm
+            .mb-3.text-center
+              img.avatar-lg.mb-2#addUserAvatarPreview(src="/uploads/empty.jpg" alt="Аватар")
+              .d-flex.justify-content-center.gap-2
+                label.btn.btn-sm.btn-outline-primary
+                  i.bi.bi-camera.me-1
+                  | Выбрать аватар
+                  input.d-none#addAvatarInput(type="file" accept="image/*")
+                button.btn.btn-sm.btn-outline-secondary#resetAddAvatarBtn(type="button" style="display: none;")
+                  i.bi.bi-x-lg.me-1
+                  | Сбросить
+            .mb-3
+              label.form-label(for="addFullName") ФИО *
+              input.form-control#addFullName(type="text" required placeholder="Иванов Иван Иванович")
+            .mb-3
+              label.form-label(for="addBirthDate") Дата рождения
+              input.form-control#addBirthDate(type="date")
+            .mb-3
+              label.form-label(for="addEmail") Email *
+              input.form-control#addEmail(type="email" required placeholder="example@mail.ru")
+            .row.g-3.mb-3
+              .col-6
+                label.form-label(for="addRole") Роль
+                select.form-select#addRole
+                  option(value="user" selected) Пользователь
+                  option(value="admin") Администратор
+              .col-6
+                label.form-label(for="addStatus") Статус
+                select.form-select#addStatus
+                  option(value="unconfirmed" selected) Не подтвержден
+                  option(value="active") Активный
+                  option(value="banned") Заблокирован
+        .modal-footer
+          button.btn.btn-light(type="button" data-bs-dismiss="modal") Отмена
+          button.btn.btn-primary#saveNewUserBtn(type="button") Создать
+
+  .modal.fade#editUserModal(tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          h5.modal-title#editUserModalLabel Редактирование пользователя
+          button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+        .modal-body
+          form#editUserForm
+            input#editUserId(type="hidden")
+            .mb-3.text-center
+              img.avatar-lg.mb-2#editUserAvatarPreview(src="" alt="Аватар")
+              .d-flex.justify-content-center.gap-2
+                label.btn.btn-sm.btn-outline-primary
+                  i.bi.bi-camera.me-1
+                  | Загрузить аватар
+                  input.d-none#editAvatarInput(type="file" accept="image/*")
+                button.btn.btn-sm.btn-outline-danger#deleteAvatarBtn(type="button")
+                  i.bi.bi-trash.me-1
+                  | Удалить аватар
+            .mb-3
+              label.form-label(for="editFullName") ФИО *
+              input.form-control#editFullName(type="text" required)
+            .mb-3
+              label.form-label(for="editBirthDate") Дата рождения
+              input.form-control#editBirthDate(type="date")
+            .mb-3
+              label.form-label(for="editEmail") Email *
+              input.form-control#editEmail(type="email" required)
+            .row.g-3.mb-3
+              .col-6
+                label.form-label(for="editRole") Роль
+                select.form-select#editRole
+                  option(value="user") Пользователь
+                  option(value="admin") Администратор
+              .col-6
+                label.form-label(for="editStatus") Статус
+                select.form-select#editStatus
+                  option(value="unconfirmed") Не подтвержден
+                  option(value="active") Активный
+                  option(value="banned") Заблокирован
+        .modal-footer
+          button.btn.btn-light(type="button" data-bs-dismiss="modal") Отмена
+          button.btn.btn-primary#updateUserBtn(type="button") Сохранить изменения
+
+  .modal.fade#photosModal(tabindex="-1" aria-labelledby="photosModalLabel" aria-hidden="true")
+    .modal-dialog.modal-lg.modal-dialog-scrollable
+      .modal-content
+        .modal-header
+          div
+            h5.modal-title#photosModalLabel Фотографии пользователя
+            small.text-muted#photosUserSubtitle
+          button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+        .modal-body
+          .card.mb-4.border-primary-subtle.bg-light
+            .card-body
+              h6.card-title.d-flex.align-items-center.gap-2
+                i.bi.bi-cloud-arrow-up-fill.text-primary
+                | Загрузить фотографию
+              form#uploadPhotoForm.row.g-2.align-items-center
+                .col-md-5
+                  input.form-control.form-control-sm#newPhotoFileInput(type="file" accept="image/*" required)
+                .col-md-5
+                  input.form-control.form-control-sm#newPhotoCaptionInput(type="text" placeholder="Подпись к фото...")
+                .col-md-2
+                  button.btn.btn-sm.btn-primary.w-100#uploadPhotoBtn(type="submit")
+                    | Загрузить
+          
+          div#photosGrid.photo-grid
+            p.text-muted.text-center.py-3 Загрузка фотографий...
+        .modal-footer
+          button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Закрыть
